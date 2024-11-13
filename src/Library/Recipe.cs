@@ -14,7 +14,8 @@ namespace Full_GRASP_And_SOLID
         private bool cooked = false;
         public bool Cooked 
         { 
-            get { return cooked; } 
+            get { return cooked; }
+            private set { cooked = value; }
         }
         
         // Agregado por Creator
