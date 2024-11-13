@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Full_GRASP_And_SOLID
 {
@@ -22,15 +23,21 @@ namespace Full_GRASP_And_SOLID
 
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
-            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
-            recipe.AddStep("Dejar enfriar", 60);
+            recipe.AddStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 2);
+            recipe.AddStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 2);
+            recipe.AddStep("Dejar enfriar", 1);
 
             IPrinter printer;
             printer = new ConsolePrinter();
             printer.PrintRecipe(recipe);
             printer = new FilePrinter();
             printer.PrintRecipe(recipe);
+            
+            
+            Console.WriteLine($"Cooked: {recipe.Cooked}");
+            recipe.Cook();
+            Thread.Sleep(5000); 
+            Console.WriteLine($"Cooked: {recipe.Cooked}");
         }
 
         private static void PopulateCatalogs()
